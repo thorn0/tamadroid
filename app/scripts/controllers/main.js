@@ -1,7 +1,7 @@
 angular.module("tamadroidApp").controller("MainCtrl", function($scope, $interval, appMarket, $modal) {
 
     $scope.speed = {
-        interval: 1000,
+        interval: 2000,
         acceleration: 1
     };
     $scope.name = "Tamadroid";
@@ -29,6 +29,8 @@ angular.module("tamadroidApp").controller("MainCtrl", function($scope, $interval
 
     $scope.recharge = function() {
         var currentBattery = $scope.robot.battery;
+	    if (currentBattery >= 100)
+	        return;
         var newBattery = currentBattery + 10;
         if (newBattery > 100)
             newBattery = 100;
