@@ -1,4 +1,8 @@
-<div class="row-fluid"><h1>{{name}}</h1>
+<div class="row-fluid">
+	<h1>
+		<span ng-show="!editing" ng-click="editing=true">{{name}}</span>
+		<span ng-show="editing"><input ng-model="name"><button ng-click="editing = false">Save</button></span>
+	</h1>
     <div class="progress-smth">
         {{var.current}}/{{var.total}}
         <div class="progress progress-danger">

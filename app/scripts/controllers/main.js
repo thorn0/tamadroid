@@ -6,7 +6,7 @@ angular.module("tamadroidApp").controller("MainCtrl", function($scope, $interval
 		$scope.rotate += 1;
 	}, 500, 10);
 
-    $scope.name = "YourName";
+    $scope.name = "Tamadroid";
 
     $scope.install = function() {
         //test action
@@ -25,8 +25,12 @@ angular.module("tamadroidApp").controller("MainCtrl", function($scope, $interval
 		memory: 1000,
 		freeMemory: 700,
 		installedApps: [
-		]
+		],
+		level: 1,
+		xp: 0
 	};
+
+
 	
 	
 }).factory("appMarket", function() {
