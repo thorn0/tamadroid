@@ -25,7 +25,7 @@ angular.module("tamadroidApp").controller("MainCtrl", function($scope, $interval
 			templateUrl: "views/install.html",
 			scope: $scope
 		});
-    }
+    };
 
     $scope.recharge = function() {
         var currentBattery = $scope.robot.battery;
@@ -46,8 +46,30 @@ angular.module("tamadroidApp").controller("MainCtrl", function($scope, $interval
 		xp: 0
 	};
 
+	var batteryColorCache = {}, scale = chroma.scale(["gray", "#a4c639"]).mode('lab').domain([0, 100]);
+	$scope.getColorByBattery = function() {
+		var bat = Math.floor(robot.battery);
+		if (!batteryColorCache[bat]) {
+			batteryColorCache[bat] = scale(robot.battery).hex();
+		}
+		return batteryColorCache[bat];
+	};
 
-	
+	$scope.appMarket = appMarket;
+	$scope.addXP = function(){
+
+		var currentXP = $scope.robot.xp;
+		var newXP = currentXP + 10;
+
+		$scope.robot.xp = newXP;
+
+		if (Math.floor(newXP/100) > Math.floor(currentXP/100)){
+			$scope.robot.level++;
+			alert("Congratulations! You've got level up!\n" +
+				"Your new level is "+$scope.robot.level);
+		}
+
+	}
 	
 	
 }).factory("appMarket", function() {

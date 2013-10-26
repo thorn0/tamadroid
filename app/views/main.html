@@ -3,9 +3,13 @@
 		<span ng-show="!editing" ng-click="editing=true">{{name}}</span>
 		<span ng-show="editing"><input ng-model="name"><button ng-click="editing = false">Save</button></span>
 	</h1>
+	<h3>
+		{{robot.level}} Level
+	</h3>
     <div class="progress-smth">
+        {{robot.xp}}/{{robot.level * 100 }}
         <div class="progress progress-danger">
-            <div class="bar" style="width: 80%"></div>
+            <div class="bar" style="width: {{robot.xp%100}}%"></div>
         </div>
     </div>
 </div>
