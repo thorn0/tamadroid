@@ -6,10 +6,18 @@ angular.module("tamadroidApp").controller("MainCtrl", function($scope, $interval
     };
     $scope.name = "Tamadroid";
 
-	$interval(function() {
+	var intervalPromise;
+    function setInterval() {
+        intervalPromise = $interval(function() {
 		$scope.rotate += 1;
         $scope.robot.battery--;
 	}, $scope.speed.interval * $scope.speed.acceleration);
+    }
+
+    $scope.$watch('speed', function() {
+      if (intervalPromise) $interval.cancel(intervalPromise);
+      setInterval();
+    }, true);
 
 
     $scope.install = function() {
@@ -17,6 +25,15 @@ angular.module("tamadroidApp").controller("MainCtrl", function($scope, $interval
 			templateUrl: "views/install.html",
 			scope: $scope
 		});
+    };
+
+    $scope.recharge = function() {
+        var currentBattery = $scope.robot.battery;
+        var newBattery = currentBattery + 10;
+        if (newBattery > 100)
+            newBattery = 100;
+        $scope.robot.battery = newBattery;
+        $scope.addXP();
     };
 
 	var robot = $scope.robot = {
