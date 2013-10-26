@@ -1,0 +1,13 @@
+<div class="modal-header">
+	<button type="button" class="close" ng-click="$close()">&times;</button>
+	<h3>Install</h3>
+</div>
+<div class="modal-body">
+	<table class="table">
+		<tr ng-repeat="app in appMarket.getAvailableApps() track by app.name">
+			<td><button class="btn" ng-click="addXP()">Install</button></td>
+			<td>{{app.name}} v. {{app.ver}}</td>
+			<td><span ng-if="app.author">by {{app.author}}</span></td>
+		</tr>
+	</table>
+</div>

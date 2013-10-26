@@ -1,0 +1,74 @@
+<div class="row-fluid">
+	<h1>
+		<span ng-show="!editing" ng-click="editing=true">{{robot.name}}</span>
+		<span ng-show="editing"><input ng-model="robot.name"><button class="btn" ng-click="editing=false">Save</button></span>
+	</h1>
+	<h3>
+		{{robot.level}} Level
+	</h3>
+    <div class="progress-smth">
+        XP {{robot.xp}}/{{robot.level * 100 }}
+        <div class="progress progress-danger">
+            <div class="bar" style="width: {{robot.xp%100}}%"></div>
+        </div>
+    </div>
+</div>
+<div class="well">
+    <div class="row-fluid">
+        <div class="span6">
+
+            <div class="pic">
+                <div ng-include="'views/robot.html'"></div>
+            </div>
+        </div>
+
+        <div class="span6">
+            <div class="progress-mood">
+                <h4>Mood</h4>
+
+                <div class="progress progress-warning">
+                    <div class="bar" style="width: 60%"></div>
+                </div>
+            </div>
+            <div class="progress-charge">
+                <h4>Battery</h4>
+
+                <div class="progress progress-info">
+                    <div class="bar" ng-style="{width: robot.battery + '%' }"></div>
+                </div>
+            </div>
+            <div class="progress-memory">
+                <h4>Memory</h4>
+
+                <div class="progress progress-success">
+                    <div class="bar" style="width: 40%"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="well">
+    <div class="row-fluid">
+        <button type="button" class="btn btn-primary" ng-click="openInstallModal()">Install app</button>
+        <button type="button" class="btn btn-primary" ng-click="recharge()">Charge</button>
+        <button type="button" class="btn btn-primary" ng-click="doSmth()">Some action</button>
+    </div>
+</div>
+
+<div class="span1 speed">
+    <span class="label">Speed</span>
+    <label class="radio">
+        <input type="radio" value="1" ng-model="speed.acceleration" checked="checked">
+        normal
+    </label>
+    <label class="radio">
+        <input type="radio" value="0.5" ng-model="speed.acceleration">
+        faster
+    </label>
+    <label class="radio">
+        <input type="radio" value="0.025" ng-model="speed.acceleration">
+        fastest
+    </label>
+</div>
