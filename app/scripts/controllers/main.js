@@ -32,6 +32,12 @@ angular.module("tamadroidApp").controller("MainCtrl", function($scope, $interval
         $scope.robot.battery = Math.min($scope.robot.battery + 10, 100);
         $scope.addXP();
     };
+	
+	$scope.install = function(app) {
+		app = angular.copy(app);
+		robot.installedApps.push(app);
+		$scope.addXP();
+	};
 
 	var robot = $scope.robot = {
 		name: "Tamadroid",

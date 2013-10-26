@@ -24,3 +24,13 @@ body {
 .pic {
 	height: 400px;
 }
+
+.toma-toolbar {
+	position: relative;
+}
+
+.toma-toolbar>form {
+	position: absolute;
+	right: 19px;
+	top: 19px;
+}
