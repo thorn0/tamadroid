@@ -2,7 +2,8 @@ angular.module("tamadroidApp").factory("appMarket", function() {
 
 	var marketApps = [
 		{ name: "FooApp", ver: 1 },
-		{ name: "BarApp", ver: 2 }
+		{ name: "BarApp", ver: 2 },
+		{ name: "Ingress", ver: 10 }
 	];
 	
 	var lastUpdate = new Date();
