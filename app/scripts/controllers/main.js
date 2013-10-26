@@ -1,29 +1,25 @@
 angular.module("tamadroidApp").controller("MainCtrl", function($scope, $interval) {
 
-	$scope.rotate = 0;
-	
+    $scope.speed = {
+        interval: 1000,
+        acceleration: 1
+    };
+    $scope.name = "YourName";
+
 	$interval(function() {
 		$scope.rotate += 1;
-	}, 500, 10);
-
-    $scope.name = "YourName";
+        $scope.robot.battery--;
+	}, $scope.speed.interval * $scope.speed.acceleration);
 
     $scope.install = function() {
         //test action
         $scope.name = "Qwerty";
     }
 
-    $scope.var = {
-        current: 90,
-        total: 100
-    };
-
-    $scope.name = "YourName";
-	
 	var robot = $scope.robot = {
 		battery: 100,
-		memory: 1000,
-		freeMemory: 700,
+		memory: 70,
+        mood: 100,
 		installedApps: [
 		]
 	};
