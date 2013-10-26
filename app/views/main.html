@@ -3,6 +3,11 @@
 		<span ng-show="!editing" ng-click="editing=true">{{robot.name}}</span>
 		<span ng-show="editing"><input ng-model="robot.name"><button class="btn" ng-click="editing=false">Save</button></span>
 	</h1>
+	<div class="toma-alerts">
+		<div alert ng-repeat="alert in alerts" type="alert.type" close="closeAlert(alert)">
+			<div ng-bind-html="alert.msg"></div>
+		</div>
+	</div>
 	<h3>
 		{{robot.level}} Level
 	</h3>

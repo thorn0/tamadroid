@@ -1,10 +1,10 @@
-angular.module("tamadroidApp").controller("MainCtrl", function($scope, $interval, appMarket, $modal) {
+angular.module("tamadroidApp").controller("MainCtrl", function($scope, $interval, $timeout, appMarket, $modal) {
 
     $scope.speed = {
         interval: 2000,
         acceleration: 1
     };
-
+	
 	var intervalPromise;
 	function setInterval() {
 		if (intervalPromise) {
@@ -67,10 +67,29 @@ angular.module("tamadroidApp").controller("MainCtrl", function($scope, $interval
 		$scope.robot.xp = newXP;
 		if (Math.floor(newXP / 100) > Math.floor(currentXP / 100)) {
 			$scope.robot.level++;
-			alert("Congratulations! You've got level up!\n" +
+			alert("<strong>Congratulations!</strong> You've got level up!<br>" +
 				"Your new level is " + $scope.robot.level);
 		}
 	};
-	
+
+	function alert(msg, time, type) {
+		var alert = {
+			msg: msg,
+			type: type || "success"
+		};
+		$scope.alerts.push(alert);
+		$timeout(function() {
+			$scope.closeAlert(alert);
+		}, time || 30000);
+	}
+	$scope.alerts = [ ];
+	$scope.closeAlert = function(alert) {
+		for (var i = 0; i < $scope.alerts.length; i++) {
+			if ($scope.alerts[i] == alert) {
+				$scope.alerts.splice(i, 1);
+				break;
+			}
+		}
+	}; 
 	
 });
