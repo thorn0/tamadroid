@@ -1,24 +1,24 @@
 angular.module("tamadroidApp").controller("MainCtrl", function($scope, $interval, appMarket, $modal) {
 
 	$scope.rotate = 0;
-	
+
 	$interval(function() {
 		$scope.rotate += 1;
 	}, 500);
 
-    $scope.name = "Tamadroid";
+	$scope.name = "Tamadroid";
 
-    $scope.install = function() {
-        $modal.open({
+	$scope.install = function() {
+		$modal.open({
 			templateUrl: "views/install.html",
 			scope: $scope
 		});
-    }
+	}
 
-    $scope.var = {
-        current: 90,
-        total: 100
-    };
+	$scope.var = {
+		current: 90,
+		total: 100
+	};
 
 	
 	var robot = $scope.robot = {
@@ -32,7 +32,20 @@ angular.module("tamadroidApp").controller("MainCtrl", function($scope, $interval
 	};
 
 
-	
+	$scope.addXP = function(){
+
+		var currentXP = $scope.robot.xp;
+		var newXP = currentXP + 10;
+
+		$scope.robot.xp = newXP;
+
+		if (Math.floor(newXP/100) > Math.floor(currentXP/100)){
+			$scope.robot.level++;
+			alert("Congratulations! You've got level up!\n" +
+				"Your new level is "+$scope.robot.level);
+		}
+
+	}
 	
 	
 }).factory("appMarket", function() {
