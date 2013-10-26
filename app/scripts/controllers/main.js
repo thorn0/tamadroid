@@ -29,7 +29,16 @@ angular.module("tamadroidApp").controller("MainCtrl", function($scope, $interval
 		xp: 0
 	};
 
+	var batteryColorCache = {}, scale = chroma.scale(["gray", "#a4c639"]).mode('lab').domain([0, 100]);
+	$scope.getColorByBattery = function() {
+		var bat = Math.floor(robot.battery);
+		if (!batteryColorCache[bat]) {
+			batteryColorCache[bat] = scale(robot.battery).hex();
+		}
+		return batteryColorCache[bat];
+	};
 
+	$scope.appMarket = appMarket;
 	$scope.addXP = function(){
 
 		var currentXP = $scope.robot.xp;
