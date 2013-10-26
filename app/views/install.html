@@ -4,7 +4,7 @@
 </div>
 <div class="modal-body">
 	<div ng-repeat="app in appMarket.getAvailableApps() track by app.name" style="padding-bottom: 10px">
-		<button class="btn">Install</button>
+		<button class="btn" ng-click="addXP()">Install</button>
 		{{app.name}} v. {{app.ver}}
 	</div>
 </div>
