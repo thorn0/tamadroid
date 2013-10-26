@@ -34,7 +34,7 @@
                 <h4>Battery</h4>
 
                 <div class="progress progress-info">
-                    <div class="bar" style="width: 20%"></div>
+                    <div class="bar" ng-style="{width: robot.battery + '%' }"></div>
                 </div>
             </div>
             <div class="progress-memory">
@@ -55,4 +55,20 @@
         <button type="button" class="btn btn-primary" ng-click="charge()">Charge</button>
         <button type="button" class="btn btn-primary" ng-click="doSmth()">Some action</button>
     </div>
+</div>
+
+<div class="span1 speed">
+    <span class="label">Speed = {{speed.acceleration}}</span>
+    <label class="radio">
+        <input type="radio" value="1" ng-model="speed.acceleration" checked>
+        x1
+    </label>
+    <label class="radio">
+        <input type="radio" value="2" ng-model="speed.acceleration">
+        x2
+    </label>
+    <label class="radio">
+        <input type="radio" value="1000" ng-model="speed.acceleration">
+        x10
+    </label>
 </div>

@@ -3,5 +3,7 @@
 	<h3>Install</h3>
 </div>
 <div class="modal-body">
-	
+	<div ng-repeat="app in appMarket.getAvailableApps() track by app.name">
+		{{app.name}} v. {{app.ver}}
+	</div>
 </div>
