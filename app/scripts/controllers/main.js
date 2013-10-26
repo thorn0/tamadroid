@@ -20,7 +20,6 @@ angular.module("tamadroidApp").controller("MainCtrl", function($scope, $interval
         total: 100
     };
 
-    $scope.name = "YourName";
 	
 	var robot = $scope.robot = {
 		battery: 100,
