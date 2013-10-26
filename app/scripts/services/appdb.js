@@ -1,4 +1,4 @@
-angular.module("tamadroidApp").factory("appMarket", function() {
+angular.module("tamadroidApp").factory("appDb", function() {
 	return [ {
 		name: "Google Play services",
 		author: "Google"
