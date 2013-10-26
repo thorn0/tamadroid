@@ -1,7 +1,7 @@
 <div class="row-fluid">
 	<h1>
-		<span ng-show="!editing" ng-click="editing=true">{{name}}</span>
-		<span ng-show="editing"><input ng-model="name"><button ng-click="editing = false">Save</button></span>
+		<span ng-show="!editing" ng-click="editing=true">{{robot.name}}</span>
+		<span ng-show="editing"><input ng-model="robot.name"><button class="btn" ng-click="editing=false">Save</button></span>
 	</h1>
 	<h3>
 		{{robot.level}} Level
@@ -51,7 +51,7 @@
 
 <div class="well">
     <div class="row-fluid">
-        <button type="button" class="btn btn-primary" ng-click="install()">Install app</button>
+        <button type="button" class="btn btn-primary" ng-click="openInstallModal()">Install app</button>
         <button type="button" class="btn btn-primary" ng-click="recharge()">Charge</button>
         <button type="button" class="btn btn-primary" ng-click="doSmth()">Some action</button>
     </div>

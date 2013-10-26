@@ -4,23 +4,21 @@ angular.module("tamadroidApp").controller("MainCtrl", function($scope, $interval
         interval: 2000,
         acceleration: 1
     };
-    $scope.name = "Tamadroid";
 
 	var intervalPromise;
-    function setInterval() {
-        intervalPromise = $interval(function() {
-		$scope.rotate += 1;
-        $scope.robot.battery--;
-	}, $scope.speed.interval * $scope.speed.acceleration);
-    }
+	function setInterval() {
+		if (intervalPromise) {
+			$interval.cancel(intervalPromise);
+		}
+		intervalPromise = $interval(function() {
+			$scope.rotate += 1;
+			$scope.robot.battery = Math.max(0, $scope.robot.battery - 1);
+		}, $scope.speed.interval * $scope.speed.acceleration);
+	}
 
-    $scope.$watch('speed', function() {
-      if (intervalPromise) $interval.cancel(intervalPromise);
-      setInterval();
-    }, true);
+	$scope.$watch("speed", setInterval, true);
 
-
-    $scope.install = function() {
+    $scope.openInstallModal = function() {
         $modal.open({
 			templateUrl: "views/install.html",
 			scope: $scope
@@ -28,17 +26,15 @@ angular.module("tamadroidApp").controller("MainCtrl", function($scope, $interval
     };
 
     $scope.recharge = function() {
-        var currentBattery = $scope.robot.battery;
-	    if (currentBattery >= 100)
-	        return;
-        var newBattery = currentBattery + 10;
-        if (newBattery > 100)
-            newBattery = 100;
-        $scope.robot.battery = newBattery;
+		if ($scope.robot.battery >= 100) {
+			return;
+		}
+        $scope.robot.battery = Math.min($scope.robot.battery + 10, 100);
         $scope.addXP();
     };
 
 	var robot = $scope.robot = {
+		name: "Tamadroid",
 		battery: 100,
 		memory: 70,
         mood: 100,
@@ -58,45 +54,17 @@ angular.module("tamadroidApp").controller("MainCtrl", function($scope, $interval
 	};
 
 	$scope.appMarket = appMarket;
-	$scope.addXP = function(){
 
+	$scope.addXP = function() {
 		var currentXP = $scope.robot.xp;
 		var newXP = currentXP + 10;
-
 		$scope.robot.xp = newXP;
-
-		if (Math.floor(newXP/100) > Math.floor(currentXP/100)){
+		if (Math.floor(newXP / 100) > Math.floor(currentXP / 100)) {
 			$scope.robot.level++;
 			alert("Congratulations! You've got level up!\n" +
-				"Your new level is "+$scope.robot.level);
-		}
-
-	}
-	
-	
-}).factory("appMarket", function() {
-
-	var marketApps = [
-		{ name: "FooApp", ver: 1 },
-		{ name: "BarApp", ver: 2 }
-	];
-	
-	var lastUpdate = new Date();
-	
-	function updateMarket() {
-		if (new Date() - lastUpdate > 10000) {
-			lastUpdate = new Date();
-			angular.forEach(marketApps, function(app) {
-				app.ver++;
-			});
-		}
-	}
-	
-	return {
-		getAvailableApps: function() {
-			updateMarket();
-			return marketApps;
+				"Your new level is " + $scope.robot.level);
 		}
 	};
-
+	
+	
 });

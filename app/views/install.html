@@ -3,8 +3,11 @@
 	<h3>Install</h3>
 </div>
 <div class="modal-body">
-	<div ng-repeat="app in appMarket.getAvailableApps() track by app.name" style="padding-bottom: 10px">
-		<button class="btn" ng-click="addXP()">Install</button>
-		{{app.name}} v. {{app.ver}}
-	</div>
+	<table class="table">
+		<tr ng-repeat="app in appMarket.getAvailableApps() track by app.name">
+			<td><button class="btn" ng-click="addXP()">Install</button></td>
+			<td>{{app.name}} v. {{app.ver}}</td>
+			<td><span ng-if="app.author">by {{app.author}}</span></td>
+		</tr>
+	</table>
 </div>
