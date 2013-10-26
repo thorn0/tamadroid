@@ -18,7 +18,6 @@
   "-W015": true,
   "globals": {
     "angular": false,
-	"chroma": false,
-	"alert": false
+	"chroma": false
   }
 }

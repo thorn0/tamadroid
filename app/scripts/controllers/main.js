@@ -1,4 +1,4 @@
-angular.module("tamadroidApp").controller("MainCtrl", function($scope, $interval, $timeout, appMarket, $modal) {
+angular.module("tamadroidApp").controller("MainCtrl", function($scope, $interval, appMarket, $modal, alert) {
 
     $scope.speed = {
         interval: 2000,
@@ -71,25 +71,5 @@ angular.module("tamadroidApp").controller("MainCtrl", function($scope, $interval
 				"Your new level is " + $scope.robot.level);
 		}
 	};
-
-	function alert(msg, time, type) {
-		var alert = {
-			msg: msg,
-			type: type || "success"
-		};
-		$scope.alerts.push(alert);
-		$timeout(function() {
-			$scope.closeAlert(alert);
-		}, time || 30000);
-	}
-	$scope.alerts = [ ];
-	$scope.closeAlert = function(alert) {
-		for (var i = 0; i < $scope.alerts.length; i++) {
-			if ($scope.alerts[i] == alert) {
-				$scope.alerts.splice(i, 1);
-				break;
-			}
-		}
-	}; 
 	
 });
