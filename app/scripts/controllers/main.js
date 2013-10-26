@@ -9,8 +9,10 @@ angular.module("tamadroidApp").controller("MainCtrl", function($scope, $interval
     $scope.name = "YourName";
 
     $scope.install = function() {
-        //test action
-        $scope.name = "Qwerty";
+        $modal.open({
+			templateUrl: "views/install.html",
+			scope: $scope
+		});
     }
 
     $scope.var = {
@@ -27,6 +29,7 @@ angular.module("tamadroidApp").controller("MainCtrl", function($scope, $interval
 		installedApps: [
 		]
 	};
+	
 	
 	
 }).factory("appMarket", function() {
