@@ -6,10 +6,18 @@ angular.module("tamadroidApp").controller("MainCtrl", function($scope, $interval
     };
     $scope.name = "Tamadroid";
 
-	$interval(function() {
+	var intervalPromise;
+    function setInterval() {
+        intervalPromise = $interval(function() {
 		$scope.rotate += 1;
         $scope.robot.battery--;
 	}, $scope.speed.interval * $scope.speed.acceleration);
+    }
+
+    $scope.$watch('speed', function() {
+      if (intervalPromise) $interval.cancel(intervalPromise);
+      setInterval();
+    }, true);
 
 
     $scope.install = function() {
