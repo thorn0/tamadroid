@@ -1,16 +1,18 @@
-angular.module("tamadroidApp").controller("MainCtrl", function($scope, $interval) {
+angular.module("tamadroidApp").controller("MainCtrl", function($scope, $interval, appMarket, $modal) {
 
 	$scope.rotate = 0;
 	
 	$interval(function() {
 		$scope.rotate += 1;
-	}, 500, 10);
+	}, 500);
 
     $scope.name = "Tamadroid";
 
     $scope.install = function() {
-        //test action
-        $scope.name = "Qwerty";
+        $modal.open({
+			templateUrl: "views/install.html",
+			scope: $scope
+		});
     }
 
     $scope.var = {
@@ -33,6 +35,7 @@ angular.module("tamadroidApp").controller("MainCtrl", function($scope, $interval
 
 	
 	
+	
 }).factory("appMarket", function() {
 
 	var marketApps = [
@@ -40,8 +43,15 @@ angular.module("tamadroidApp").controller("MainCtrl", function($scope, $interval
 		{ name: "BarApp", ver: 2 }
 	];
 	
-	function updateMarket() {
+	var lastUpdate = new Date();
 	
+	function updateMarket() {
+		if (new Date() - lastUpdate > 10000) {
+			lastUpdate = new Date();
+			angular.forEach(marketApps, function(app) {
+				app.ver++;
+			});
+		}
 	}
 	
 	return {
