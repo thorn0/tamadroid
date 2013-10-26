@@ -27,6 +27,15 @@ angular.module("tamadroidApp").controller("MainCtrl", function($scope, $interval
 		});
     }
 
+    $scope.recharge = function() {
+        var currentBattery = $scope.robot.battery;
+        var newBattery = currentBattery + 10;
+        if (newBattery > 100)
+            newBattery = 100;
+        $scope.robot.battery = newBattery;
+        $scope.addXP();
+    };
+
 	var robot = $scope.robot = {
 		battery: 100,
 		memory: 70,
