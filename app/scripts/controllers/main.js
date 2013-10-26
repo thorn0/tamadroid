@@ -1,19 +1,22 @@
-angular.module("tamadroidApp").controller("MainCtrl", function($scope, $interval) {
+angular.module("tamadroidApp").controller("MainCtrl", function($scope, $interval, appMarket, $modal) {
 
     $scope.speed = {
         interval: 1000,
         acceleration: 1
     };
-    $scope.name = "YourName";
+    $scope.name = "Tamadroid";
 
 	$interval(function() {
 		$scope.rotate += 1;
         $scope.robot.battery--;
 	}, $scope.speed.interval * $scope.speed.acceleration);
 
+
     $scope.install = function() {
-        //test action
-        $scope.name = "Qwerty";
+        $modal.open({
+			templateUrl: "views/install.html",
+			scope: $scope
+		});
     }
 
 	var robot = $scope.robot = {
@@ -21,8 +24,13 @@ angular.module("tamadroidApp").controller("MainCtrl", function($scope, $interval
 		memory: 70,
         mood: 100,
 		installedApps: [
-		]
+		],
+		level: 1,
+		xp: 0
 	};
+
+
+	
 	
 	
 }).factory("appMarket", function() {
@@ -32,8 +40,15 @@ angular.module("tamadroidApp").controller("MainCtrl", function($scope, $interval
 		{ name: "BarApp", ver: 2 }
 	];
 	
-	function updateMarket() {
+	var lastUpdate = new Date();
 	
+	function updateMarket() {
+		if (new Date() - lastUpdate > 10000) {
+			lastUpdate = new Date();
+			angular.forEach(marketApps, function(app) {
+				app.ver++;
+			});
+		}
 	}
 	
 	return {
