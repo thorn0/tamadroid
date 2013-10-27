@@ -1,5 +1,5 @@
 angular.module("tamadroidApp").factory("appDb", function() {
-	return [ {
+	var db = [ {
 		name: "Google Play services",
 		author: "Google"
 	}, {
@@ -63,4 +63,10 @@ angular.module("tamadroidApp").factory("appDb", function() {
 		name: "Google Translate",
 		author: "Google"
 	} ];
+	var backup = angular.copy(db);
+	db.restore = function() {
+		db.length = 0;
+		db.push.apply(db, backup);
+	};
+	return db;
 });

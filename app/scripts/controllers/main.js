@@ -19,6 +19,7 @@ angular.module("tamadroidApp").controller("MainCtrl", function($scope, $interval
 	$scope.$watch("speed", setInterval, true);
 
     $scope.openInstallModal = function() {
+		appMarket.updateMarket();
         $modal.open({
 			templateUrl: "views/install.html",
 			scope: $scope
