@@ -71,6 +71,16 @@ angular.module("tamadroidApp").controller("MainCtrl", function($scope, $interval
 		alert(app.name + " v. " + app.ver + " has been installed");
 	};
 
+	$scope.uninstall = function(app) {
+		for (var i = 0; i < robot.installedApps.length; i++) {
+			var installedApp = robot.installedApps[i];
+			if (installedApp.name === app.name) {
+				robot.installedApps.splice(i, 1);
+				break;
+			}
+		}
+	};
+	
 	$scope.$watch("robot.installedApps", function() {
 		robot.memory = robot.systemMemory;
 		for (var i = 0; i < robot.installedApps.length; i++) {
