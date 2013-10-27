@@ -16,7 +16,7 @@
 			<rect rx="15" height="80" width="35" />
 		</g>
 
-		<g id="headPrototype" fill="{{getColorByBattery()}}" transform="translate(-75,0) rotate(-7,0,150)">
+		<g id="headPrototype" fill="{{getColorByBattery()}}" transform="translate(-75,0) rotate({{-7 - (100 - robot.mood) / 3 }},0,150)">
 			<ellipse cy="140" cx="75" rx="75" ry="65" clip-path="url(#headClip)" />
 			<clipPath id="headClip">
 				<rect height="84" width="182" x="0" y="59" />
