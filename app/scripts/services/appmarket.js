@@ -12,7 +12,8 @@ angular.module("tamadroidApp").factory("appMarket", function(appDb, filterFilter
 	var activeApps = [
 		{ name: "FooApp", ver: 1, author: "Acme Corp." },
 		{ name: "BarApp", ver: 2, size: 80 },
-		{ name: "Ingress", ver: 10, author: "Niantic", batteryFactor: 2 }
+		{ name: "Ingress", ver: 10, author: "Niantic", batteryUsage: 20 },
+		{ name: "Skype", ver: 4, author: "Skype", batteryUsage: 30 }
 	];
 	
 	var abandonedApps = [ ];

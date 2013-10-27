@@ -1,10 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="-150 0 300 400" width="400" height="400">
 	<g>
-		<g id="leftHand" fill="{{getColorByBattery()}}" transform="translate(-117,152) rotate(45,17,17)">
+		<g id="leftHand" fill="{{getColorByBattery()}}" transform="translate(-117,{{152 + (100-getBatteryLevel()) /100 * 45}}) rotate({{getBatteryLevel() /100 * 45}},17,17)">
 			<rect rx="15" height="100" width="35" />
 		</g>
 
-		<g id="rightHand" fill="{{getColorByBattery()}}" transform="translate(82,152) rotate(-45,17,17)">
+		<g id="rightHand" fill="{{getColorByBattery()}}" transform="translate(82,{{152 + (100-getBatteryLevel()) /100 * 45}}) rotate(-{{getBatteryLevel() /100 * 45}},17,17)">
 			<rect rx="15" height="100" width="35" />
 		</g>
 
@@ -16,16 +16,16 @@
 			<rect rx="15" height="80" width="35" />
 		</g>
 
-		<g id="headPrototype" fill="{{getColorByBattery()}}" transform="translate(-75,0) rotate({{-7 - (100 - robot.mood) / 3 }},0,150)">
+		<g id="headPrototype" fill="{{getColorByBattery()}}" transform="translate(-75,{{0 + (100-getBatteryLevel()) /100 * 45}}) rotate({{- (100 - robot.mood) / 2 }},0,150)">
 			<ellipse cy="140" cx="75" rx="75" ry="65" clip-path="url(#headClip)" />
 			<clipPath id="headClip">
 				<rect height="84" width="182" x="0" y="59" />
 			</clipPath>
 
-			<g id="leftAntenna" y="50" x="55" transform="translate(55,50) rotate(-10, 4, 26)">
+			<g id="leftAntenna" y="50" x="55" transform="translate(55,50) rotate(-{{100-getBatteryLevel()}}, 4, 26)">
 				<rect rx="3" height="30" width="8"/>
 			</g>
-			<g id="rightAntenna" y="50" x="87" transform="translate(87,50) rotate(10, 4, 26)">
+			<g id="rightAntenna" y="50" x="87" transform="translate(87,50) rotate({{100-getBatteryLevel()}}, 4, 26)">
 				<rect rx="3" height="30" width="8" />
 			</g>
 
@@ -35,7 +35,7 @@
 			</g>
 		</g>
 
-		<g id="body" fill="{{getColorByBattery()}}" transform="translate(-75,152)">
+		<g id="body" fill="{{getColorByBattery()}}" transform="translate(-75,{{152 + (100-getBatteryLevel()) /100 * 45}})">
 			<rect height="120" width="150"/>
 			<rect rx="15" height="150" width="150"/>
 		</g>

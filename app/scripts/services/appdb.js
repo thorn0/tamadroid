@@ -19,7 +19,8 @@ angular.module("tamadroidApp").factory("appDb", function() {
 		author: "Rovio Mobile Ltd."
 	}, {
 		name: "Skype",
-		author: "Skype"
+		author: "Skype",
+		batteryUsage: 30
 	}, {
 		name: "Twitter",
 		author: "Twitter"
@@ -46,7 +47,8 @@ angular.module("tamadroidApp").factory("appDb", function() {
 		author: ""
 	}, {
 		name: "Ingress",
-		author: "Niantic"
+		author: "Niantic",
+		batteryUsage: 20
 	}, {
 		name: "Fruit Ninja Free",
 		author: "Halfbrick Studios"

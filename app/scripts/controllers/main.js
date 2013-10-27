@@ -1,9 +1,13 @@
-angular.module("tamadroidApp").controller("MainCtrl", function($scope, $interval, appMarket, $modal, alert, gameSpeed) {
+angular.module("tamadroidApp").controller("MainCtrl", function($scope, $interval, appMarket, $modal, alert, gameSpeed, firmwareDb) {
 
     $scope.speed = gameSpeed;
 	
 	function decreaseMood(obj) {
-		obj.moodPoints = Math.max(0, obj.moodPoints - robot.level * Math.random() / 2);
+		var moodDecreaseSize = robot.level * Math.random() / 2;
+
+//		moodDecreaseSize = moodDecreaseSize * ($scope.speed.interval / 2000) / $scope.speed.acceleration;
+
+		obj.moodPoints = Math.max(0, obj.moodPoints - moodDecreaseSize);
 	}
 	
 	var intervalPromise;
@@ -13,7 +17,8 @@ angular.module("tamadroidApp").controller("MainCtrl", function($scope, $interval
 		}
 		intervalPromise = $interval(function() {
 			appMarket.updateMarket();
-			robot.battery = Math.max(0, robot.battery - 1);
+			dischargeTick();
+//			robot.battery = Math.max(0, robot.battery - 1);
 			decreaseMood(robot);
 			robot.mood = robot.moodPoints;
 			for (var i = 0; i < robot.installedApps.length; i++) {
@@ -33,15 +38,15 @@ angular.module("tamadroidApp").controller("MainCtrl", function($scope, $interval
 			templateUrl: "views/install.html",
 			scope: $scope
 		});
-    };
+	};
 
-    $scope.recharge = function() {
-		if (robot.battery >= 100) {
+	$scope.recharge = function() {
+		if (robot.battery >= robot.batteryMax) {
 			return;
 		}
-        robot.battery = Math.min(robot.battery + 10, 100);
-        $scope.addXP();
-    };
+		robot.battery = Math.min(robot.battery + robot.batteryMax/10, robot.batteryMax);
+		$scope.addXP();
+	};
 	
 	$scope.install = function(app) {
 		app = angular.copy(app);
@@ -97,7 +102,7 @@ angular.module("tamadroidApp").controller("MainCtrl", function($scope, $interval
 	
 	var robot = $scope.robot = {
 		name: "Tamadroid",
-		battery: 100,
+		battery: 700,
 		batteryMax: 700,
 		memory: 0,
 		systemMemory: 20,
@@ -131,13 +136,26 @@ angular.module("tamadroidApp").controller("MainCtrl", function($scope, $interval
 		}
 	};
 
-	$scope.dischargeTick = function(){
-		var batteryDecreaseSize = 1;
-		$scope.robot.battery = Math.max(0, $scope.robot.battery - batteryDecreaseSize);
+	var dischargeTick = function(){
+		var batteryDecreaseSize = 5;
+		var apps = robot.installedApps;
+		for(var i = 0; i<apps.length; i++){
+			var app = apps[i];
+
+			batteryDecreaseSize += app.batteryUsage || 1;
+		}
+
+//		batteryDecreaseSize = batteryDecreaseSize * ($scope.speed.interval / 2000) / $scope.speed.acceleration;
+
+		robot.battery = Math.max(0, robot.battery - batteryDecreaseSize);
 	}
 
 	$scope.getBatteryLevel = function(){
 		return $scope.robot.battery / $scope.robot.batteryMax * 100;
+	}
+
+	$scope.getFirmwareVersion = function(){
+		return firmwareDb[robot.level - 1].name;
 	}
 	
 });

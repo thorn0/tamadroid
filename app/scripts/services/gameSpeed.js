@@ -1,6 +1,6 @@
 angular.module("tamadroidApp").factory("gameSpeed", function() {
 	return {
-        interval: 2000,
+        interval: 1000,
         acceleration: 1
     };
 });
