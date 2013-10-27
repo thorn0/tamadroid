@@ -40,7 +40,7 @@
                 <h4>Battery</h4>
 
                 <div class="progress progress-info">
-                    <div class="bar" style="width: {{robot.battery}}%"></div>
+                    <div class="bar" ng-style="{width: getBatteryLevel() + '%' }"></div>
                 </div>
             </div>
             <div class="progress-memory">
@@ -92,4 +92,20 @@
 		</div>
 	</form>
 		
+</div>
+
+<div class="span1 speed">
+    <span class="label">Speed</span>
+    <label class="radio">
+        <input type="radio" value="1" ng-model="speed.acceleration" checked="checked">
+        normal
+    </label>
+    <label class="radio">
+        <input type="radio" value="0.5" ng-model="speed.acceleration">
+        faster
+    </label>
+    <label class="radio">
+        <input type="radio" value="0.025" ng-model="speed.acceleration">
+        fastest
+    </label>
 </div>
