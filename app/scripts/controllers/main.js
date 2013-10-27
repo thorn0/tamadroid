@@ -148,14 +148,14 @@ angular.module("tamadroidApp").controller("MainCtrl", function($scope, $interval
 //		batteryDecreaseSize = batteryDecreaseSize * ($scope.speed.interval / 2000) / $scope.speed.acceleration;
 
 		robot.battery = Math.max(0, robot.battery - batteryDecreaseSize);
-	}
+	};
 
 	$scope.getBatteryLevel = function(){
 		return $scope.robot.battery / $scope.robot.batteryMax * 100;
-	}
+	};
 
 	$scope.getFirmwareVersion = function(){
 		return firmwareDb[robot.level - 1].name;
-	}
+	};
 	
 });
