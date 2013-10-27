@@ -2,6 +2,10 @@ angular.module("tamadroidApp").controller("MainCtrl", function($scope, $interval
 
     $scope.speed = gameSpeed;
 	
+	function decreaseMood(obj) {
+		obj.moodPoints = Math.max(0, obj.moodPoints - Math.random() / 2);
+	}
+	
 	var intervalPromise;
 	function setInterval() {
 		if (intervalPromise) {
@@ -9,7 +13,15 @@ angular.module("tamadroidApp").controller("MainCtrl", function($scope, $interval
 		}
 		intervalPromise = $interval(function() {
 			appMarket.updateMarket();
-			$scope.robot.battery = Math.max(0, $scope.robot.battery - 1);
+			robot.battery = Math.max(0, robot.battery - 1);
+			decreaseMood(robot);
+			robot.mood = robot.moodPoints;
+			for (var i = 0; i < robot.installedApps.length; i++) {
+				var app = robot.installedApps[i];
+				decreaseMood(app);
+				robot.mood += app.moodPoints;
+			}
+			robot.mood = Math.max(0, robot.mood);
 		}, $scope.speed.interval * $scope.speed.acceleration);
 	}
 
@@ -35,6 +47,9 @@ angular.module("tamadroidApp").controller("MainCtrl", function($scope, $interval
 		app = angular.copy(app);
 		if (!app.size) {
 			app.size = 10;
+		}
+		if (!app.moodPoints) {
+			app.moodPoints = 10;
 		}
 		if (app.size + robot.memory > 100) {
 			alert("Not enough memory", "error");
@@ -68,7 +83,6 @@ angular.module("tamadroidApp").controller("MainCtrl", function($scope, $interval
 		if (robot.memory > 50) {
 			$scope.eyeSize = Math.round($scope.eyeSize * (1 + (robot.memory - 50) / 100));
 		}
-			console.log($scope.eyeSize);
 	}, true);
 	
 	var robot = $scope.robot = {
@@ -77,6 +91,7 @@ angular.module("tamadroidApp").controller("MainCtrl", function($scope, $interval
 		memory: 0,
 		systemMemory: 20,
         mood: 100,
+		moodPoints: 100,
 		installedApps: [
 		],
 		level: 1,
