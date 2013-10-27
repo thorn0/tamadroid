@@ -102,7 +102,7 @@ angular.module("tamadroidApp").controller("MainCtrl", function($scope, $interval
 	
 	var robot = $scope.robot = {
 		name: "Tamadroid",
-		battery: 700,
+		battery: 100,
 		batteryMax: 700,
 		memory: 0,
 		systemMemory: 20,
