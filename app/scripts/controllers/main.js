@@ -53,7 +53,7 @@ angular.module("tamadroidApp").controller("MainCtrl", function($scope, $interval
 		}
 		robot.installedApps.push(app);
 		$scope.addXP();
-		alert(app.name + " has been installed");
+		alert(app.name + " v. " + app.ver + " has been installed");
 	};
 
 	$scope.$watch("robot.installedApps", function() {
@@ -64,6 +64,11 @@ angular.module("tamadroidApp").controller("MainCtrl", function($scope, $interval
 		if (robot.memory > 100) {
 			robot.memory = 100;
 		}
+		$scope.eyeSize = 8;
+		if (robot.memory > 50) {
+			$scope.eyeSize = Math.round($scope.eyeSize * (1 + (robot.memory - 50) / 100));
+		}
+			console.log($scope.eyeSize);
 	}, true);
 	
 	var robot = $scope.robot = {
