@@ -51,8 +51,14 @@
                 </div>
             </div>
 			
-			<pre>{{robot.installedApps|json}}</pre>
+			<pre ng-if="debug">{{robot.installedApps|json}}</pre>
 			
+			<div ng-if="!debug">
+				<div ng-repeat="app in robot.installedApps | orderBy:'name' track by app.name">
+					<span class="toma-app-icon">{{app.name.charAt()}}</span>
+					{{app.name}} v. {{app.ver}}
+				</div>
+			</div>
 			
         </div>
     </div>
