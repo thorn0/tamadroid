@@ -98,6 +98,7 @@ angular.module("tamadroidApp").controller("MainCtrl", function($scope, $interval
 	var robot = $scope.robot = {
 		name: "Tamadroid",
 		battery: 100,
+		batteryMax: 700,
 		memory: 0,
 		systemMemory: 20,
         mood: 100,
@@ -129,5 +130,14 @@ angular.module("tamadroidApp").controller("MainCtrl", function($scope, $interval
 				"Your new level is " + robot.level);
 		}
 	};
+
+	$scope.dischargeTick = function(){
+		var batteryDecreaseSize = 1;
+		$scope.robot.battery = Math.max(0, $scope.robot.battery - batteryDecreaseSize);
+	}
+
+	$scope.getBatteryLevel = function(){
+		return $scope.robot.battery / $scope.robot.batteryMax * 100;
+	}
 	
 });
