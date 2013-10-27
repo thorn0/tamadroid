@@ -134,10 +134,10 @@ angular.module("tamadroidApp").controller("MainCtrl", function($scope, $interval
 	$scope.dischargeTick = function(){
 		var batteryDecreaseSize = 1;
 		$scope.robot.battery = Math.max(0, $scope.robot.battery - batteryDecreaseSize);
-	}
+	};
 
 	$scope.getBatteryLevel = function(){
 		return $scope.robot.battery / $scope.robot.batteryMax * 100;
-	}
+	};
 	
 });
