@@ -144,8 +144,8 @@ angular.module("tamadroidApp").controller("MainCtrl", function($scope, $interval
 		robot.xp = newXP;
 		if (Math.floor(newXP / 100) > Math.floor(currentXP / 100)) {
 			robot.level++;
-			alert("<strong>Congratulations!</strong> You've got level up!<br>" +
-				"Your new level is " + robot.level);
+			alert("<strong>Congratulations!</strong> <br>" +
+				"You've got OS update to <strong>" + $scope.getFirmwareVersion() +"</strong>!");
 		}
 	};
 
@@ -164,7 +164,7 @@ angular.module("tamadroidApp").controller("MainCtrl", function($scope, $interval
 	};
 
 	$scope.getBatteryLevel = function(){
-		return $scope.robot.battery / $scope.robot.batteryMax * 100;
+		return Math.round($scope.robot.battery / $scope.robot.batteryMax * 100);
 	};
 
 	$scope.getFirmwareVersion = function(){
