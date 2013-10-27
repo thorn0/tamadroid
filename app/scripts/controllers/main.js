@@ -1,9 +1,6 @@
-angular.module("tamadroidApp").controller("MainCtrl", function($scope, $interval, appMarket, $modal, alert) {
+angular.module("tamadroidApp").controller("MainCtrl", function($scope, $interval, appMarket, $modal, alert, gameSpeed) {
 
-    $scope.speed = {
-        interval: 2000,
-        acceleration: 1
-    };
+    $scope.speed = gameSpeed;
 	
 	var intervalPromise;
 	function setInterval() {
@@ -11,7 +8,7 @@ angular.module("tamadroidApp").controller("MainCtrl", function($scope, $interval
 			$interval.cancel(intervalPromise);
 		}
 		intervalPromise = $interval(function() {
-			$scope.rotate += 1;
+			appMarket.updateMarket();
 			$scope.robot.battery = Math.max(0, $scope.robot.battery - 1);
 		}, $scope.speed.interval * $scope.speed.acceleration);
 	}

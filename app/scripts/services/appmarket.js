@@ -1,4 +1,4 @@
-angular.module("tamadroidApp").factory("appMarket", function(appDb, filterFilter) {
+angular.module("tamadroidApp").factory("appMarket", function(appDb, filterFilter, gameSpeed) {
 
 	function random(min, max) {
 		return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -62,7 +62,7 @@ angular.module("tamadroidApp").factory("appMarket", function(appDb, filterFilter
 			return activeApps.concat(abandonedApps);
 		},
 		updateMarket: function() {
-			var amountOfChanges = Math.floor((new Date() - lastUpdate) / 10000);
+			var amountOfChanges = Math.floor((new Date() - lastUpdate) / (gameSpeed.interval * 5 * gameSpeed.acceleration));
 			if (amountOfChanges <= 0) {
 				return;
 			}
