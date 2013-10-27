@@ -27,7 +27,20 @@ angular.module("tamadroidApp").controller("MainCtrl", function($scope, $interval
 				robot.mood += app.moodPoints;
 			}
 			robot.mood = Math.max(0, robot.mood);
+
+			if (robot.battery <= 0 || robot.mood <= 0) {
+				if (robot.battery <= 0)
+					alert('Your robot has died without energy((','error');
+
+				if (robot.mood <= 0)
+					alert('Your robot has bored to death((','error');
+
+				$interval.cancel(intervalPromise);
+			}
+
 		}, $scope.speed.interval * $scope.speed.acceleration);
+
+
 	}
 
 	$scope.$watch("speed", setInterval, true);
@@ -102,7 +115,7 @@ angular.module("tamadroidApp").controller("MainCtrl", function($scope, $interval
 	
 	var robot = $scope.robot = {
 		name: "Tamadroid",
-		battery: 100,
+		battery: 700,
 		batteryMax: 700,
 		memory: 0,
 		systemMemory: 20,
