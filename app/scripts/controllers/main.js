@@ -33,14 +33,44 @@ angular.module("tamadroidApp").controller("MainCtrl", function($scope, $interval
 	
 	$scope.install = function(app) {
 		app = angular.copy(app);
+		if (!app.size) {
+			app.size = 10;
+		}
+		if (app.size + robot.memory > 100) {
+			alert("Not enough memory", "error");
+			return;
+		}
+		app.installed = new Date();
+		for (var i = 0; i < robot.installedApps.length; i++) {
+			var installedApp = robot.installedApps[i];
+			if (installedApp.name === app.name) {
+				if (installedApp.ver === app.ver) {
+					return;
+				}
+				robot.installedApps.splice(i, 1);
+				break;
+			}
+		}
 		robot.installedApps.push(app);
 		$scope.addXP();
+		alert(app.name + " has been installed");
 	};
 
+	$scope.$watch("robot.installedApps", function() {
+		robot.memory = robot.systemMemory;
+		for (var i = 0; i < robot.installedApps.length; i++) {
+			robot.memory += robot.installedApps[i].size;
+		}
+		if (robot.memory > 100) {
+			robot.memory = 100;
+		}
+	}, true);
+	
 	var robot = $scope.robot = {
 		name: "Tamadroid",
 		battery: 100,
-		memory: 70,
+		memory: 0,
+		systemMemory: 20,
         mood: 100,
 		installedApps: [
 		],
