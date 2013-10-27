@@ -3,7 +3,7 @@ angular.module("tamadroidApp").controller("MainCtrl", function($scope, $interval
     $scope.speed = gameSpeed;
 	
 	function decreaseMood(obj) {
-		obj.moodPoints = Math.max(0, obj.moodPoints - Math.random() / 2);
+		obj.moodPoints = Math.max(0, obj.moodPoints - robot.level * Math.random() / 2);
 	}
 	
 	var intervalPromise;
@@ -36,10 +36,10 @@ angular.module("tamadroidApp").controller("MainCtrl", function($scope, $interval
     };
 
     $scope.recharge = function() {
-		if ($scope.robot.battery >= 100) {
+		if (robot.battery >= 100) {
 			return;
 		}
-        $scope.robot.battery = Math.min($scope.robot.battery + 10, 100);
+        robot.battery = Math.min(robot.battery + 10, 100);
         $scope.addXP();
     };
 	
@@ -120,13 +120,13 @@ angular.module("tamadroidApp").controller("MainCtrl", function($scope, $interval
 	$scope.appMarket = appMarket;
 
 	$scope.addXP = function() {
-		var currentXP = $scope.robot.xp;
+		var currentXP = robot.xp;
 		var newXP = currentXP + 10;
-		$scope.robot.xp = newXP;
+		robot.xp = newXP;
 		if (Math.floor(newXP / 100) > Math.floor(currentXP / 100)) {
-			$scope.robot.level++;
+			robot.level++;
 			alert("<strong>Congratulations!</strong> You've got level up!<br>" +
-				"Your new level is " + $scope.robot.level);
+				"Your new level is " + robot.level);
 		}
 	};
 	
